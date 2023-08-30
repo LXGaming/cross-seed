@@ -127,6 +127,12 @@ async function assessCandidateHelper(
 	if (perfectMatch) {
 		return { decision: Decision.MATCH, metafile: candidateMeta };
 	}
+	if (
+		matchMode == MatchMode.RISKY &&
+		compareFileTreesIgnoringNames(candidateMeta, searchee)
+	) {
+		return { decision: Decision.MATCH_SIZE_ONLY, metafile: candidateMeta };
+	}
 	if (!searchee.path) {
 		return { decision: Decision.FILE_TREE_MISMATCH };
 	}

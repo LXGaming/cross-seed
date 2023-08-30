@@ -48,10 +48,12 @@ export async function performAction(
 				}
 				correctedlinkDir = path.join(linkDir, candidateParentDir);
 			}
-			linkFile(
-				searchee.path,
-				path.join(correctedlinkDir, newMeta.files[0].name)
-			);
+			for (let index = 0; index < searchee.files.length; index++) {
+				linkFile(
+					path.join(searchee.path, searchee.files[index].name),
+					path.join(correctedlinkDir, newMeta.files[index].name)
+				);
+			}
 		}
 	}
 
